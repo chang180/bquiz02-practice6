@@ -8,10 +8,8 @@
 
 	<title>健康促進網</title>
 	<link href="plugin/css.css" rel="stylesheet" type="text/css">
-	<link href="SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
 	<script src="plugin/jquery-1.9.1.min.js"></script>
 	<script src="plugin/js.js"></script>
-	<script src="SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -26,11 +24,11 @@
 		</div>
 		<div id="mm">
 			<div class="hal" id="lef">
+				<a class="blo" href="?do=admin">帳號管理</a>
 				<a class="blo" href="?do=po">分類網誌</a>
-				<a class="blo" href="?do=news">最新文章</a>
-				<a class="blo" href="?do=pop">人氣文章</a>
-				<a class="blo" href="?do=know">講座訊息</a>
-				<a class="blo" href="?do=que">問卷調查</a>
+				<a class="blo" href="?do=news">最新文章管理</a>
+				<a class="blo" href="?do=know">講座管理</a>
+				<a class="blo" href="?do=que">問卷管理</a>
 			</div>
 			<div class="hal" id="main">
 				<div>
@@ -39,29 +37,14 @@
 						<marquee>請民眾勇蹊投稿電子報，讓電子報成為大家相互交流、分享的園地！詳見最新文章</marquee>
 					</span>
 					<span style="width:18%; display:inline-block;">
-						<?php
-if(!empty($_SESSION['login'])){
-	if($_SESSION['login']=='admin'){
-		?>
-		歡迎，admin<br>
-		<a href="admin.php">管理</a><a href="api/logout.php">登出</a>
-		<?php
-	}else{
-		?>
-		歡迎<?=$_SESSION['login'];?><a href="api/logout.php">登出</a>
-		<?php
-	}
-
-}else{
-						?>
-						<a href="?do=login">會員登入</a>
-<?php } ?>
+						歡迎，admin<br>
+						<a href="admin.php">管理</a><a href="api/logout.php">登出</a> 
 					</span>
 					<div class="">
 						<?php
 						$do = $_GET['do'] ?? "home";
-						$file = "front/" . $do . ".php";
-						include file_exists($file) ? $file : "front/home.php";
+						$file = "admin/" . $do . ".php";
+						include file_exists($file) ? $file : "admin/home.php";
 						?>
 					</div>
 				</div>

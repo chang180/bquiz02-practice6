@@ -72,25 +72,25 @@ function to($url)
     header("location:$url");
 }
 
-$News=new DB('news');
-$Log=new DB('log');
-$Que=new DB('que');
-$Admin=new DB('admin');
-$Total=new DB('total');
+$News = new DB('news');
+$Log = new DB('log');
+$Que = new DB('que');
+$Admin = new DB('admin');
+$Total = new DB('total');
 
-$chk=$Total->count(['date'=>date("Y-m-d")]);
-if($chk==0){
-    $_SESSION['visited']=1;
-    $today['total']=1;
+$chk = $Total->count(['date' => date("Y-m-d")]);
+if ($chk == 0) {
+    $_SESSION['visited'] = 1;
+    $today['total'] = 1;
+    $today['date'] = date("Y-m-d");
     $Total->save($today);
-    $today=$Total->find(date("Y-m-d"));
 }
-$today=$Total->find(date("Y-m-d"));
+$today = $Total->find(['date' => date("Y-m-d")]);
 
-if(empty($_SESSION['visited'])){
-    $_SESSION['visited']=1;
+if (empty($_SESSION['visited'])) {
+    $_SESSION['visited'] = 1;
     $today['total']++;
     $Total->save($today);
-    $today=$Total->find(date("Y-m-d"));
+    $today = $Total->find(['date' => date("Y-m-d")]);
 }
-// $total=$Total->q();
+$total = $Total->q(" SELECT SUM(total) FROM total ");
